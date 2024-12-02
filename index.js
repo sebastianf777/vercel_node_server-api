@@ -35,7 +35,7 @@ app.post('/api/store-ip', (req, res) => {
     return res.status(400).json({ message: 'Invalid request data' });
   }
 
-  const collection = db.collection('ipData');
+  const collection = db.collection('vercel_node_server');
   collection.insertOne({ prefix, ip, timestamp })
     .then(result => {
       console.log('IP data stored successfully:', result);
