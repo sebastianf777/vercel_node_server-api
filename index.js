@@ -5,7 +5,8 @@ const express = require('express');
 const { MongoClient } = require('mongodb'); // Import MongoDB client
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const cors = require('cors');
+app.use(cors({ origin: '*' }));
 app.use(express.json()); // To parse JSON in request bodies
 
 // MongoDB setup
