@@ -5,11 +5,13 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+console.log('Loaded API Key:', process.env.API_KEY); // Debugging statement
+
 app.use(express.json()); // To parse JSON in request bodies
 
 // Middleware to check the API key
 app.use((req, res, next) => {
-  const apiKey = req.headers['x-api-key'];
+  const apiKey = req.headers['x_api_key'];
   if (!apiKey || apiKey !== process.env.API_KEY) {
     return res.status(403).json({ message: 'Forbidden: Invalid API Key' });
   }
