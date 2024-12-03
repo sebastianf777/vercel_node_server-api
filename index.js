@@ -27,14 +27,15 @@ MongoClient.connect(process.env.MONGODB_URI)
 
     // API endpoint to store IP data
     app.post('/api/store-ip', (req, res) => {
-      const { prefix, ip, timestamp } = req.body;
+      const { prefixA, prefixB, prefixC, stateB, stateC, ip, timestamp } = req.body;
 
-      if (!prefix || !ip || !timestamp) {
+       // Check if all required fields are present
+       if (!prefixA || !prefixB || !prefixC || !stateB || !stateC || !ip || !timestamp) {
         return res.status(400).json({ message: 'Invalid request data' });
       }
 
       const collection = db.collection('vercel_node_server'); // Correct collection name
-      collection.insertOne({ prefix, ip, timestamp })
+      collection.insertOne({ prefixA, prefixB, prefixC, stateB, stateC, ip, timestamp })
         .then(result => {
           console.log('IP data stored successfully:', result);
           res.status(200).json({ message: 'IP data stored successfully' });
